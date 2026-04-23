@@ -1,0 +1,31 @@
+# --- Core API ---
+fastapi
+uvicorn
+pydantic
+python-dotenv
+
+# --- LangChain ---
+langchain-groq
+langchain-community
+langchain-core
+langchain-google-genai
+tavily-python
+
+# --- Database ---
+duckdb
+duckdb-engine==0.15.0
+sqlalchemy==2.0.36
+pandas
+
+# --- Vector Stores ---
+qdrant-client
+chromadb
+sentence-transformers
+
+# --- Document parsing ---
+pypdf
+
+# --- Plotting (used by plotting_agent at runtime) ---
+matplotlib
+seaborn
+numpy

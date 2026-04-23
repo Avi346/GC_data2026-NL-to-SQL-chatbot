@@ -1,0 +1,234 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'montreal-serial-bold';
+  src: url('https://static.wfonts.com/data/2015/12/24/montreal-serial/montreal-serial-bold.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'montreal-serial-extrabold';
+  src: url('https://static.wfonts.com/data/2015/12/24/montreal-serial-extrabold/montreal-serial-extrabold-regular.ttf') format('truetype');
+  font-display: swap;
+}
+
+@theme {
+  --font-sans: "montreal-serial-bold", "Inter", system-ui, -apple-system, sans-serif;
+  
+  /* Standardized red colors */
+  --color-brand-primary: #ff4756;
+  --color-brand-accent: #ffb7bc;
+  --color-brand-medium: #ff6d78;
+  
+  /* Standardized glass colors */
+  --color-glass-base: rgba(0, 0, 0, 0.4);
+  --color-glass-subtle: rgba(255, 255, 255, 0.02);
+  --color-glass-surface: rgba(255, 255, 255, 0.04);
+  --color-glass-highlight: rgba(255, 255, 255, 0.08);
+  
+  /* Borders */
+  --color-glass-border-subtle: rgba(255, 255, 255, 0.04);
+  --color-glass-border: rgba(255, 255, 255, 0.08);
+  --color-glass-border-strong: rgba(255, 255, 255, 0.15);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: inherit;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  background-color: #000;
+  color: #e2e8f0;
+  overflow: hidden;
+  font-weight: 400;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Base Glass Container - used globally */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-panel-subtle {
+  background: rgba(255, 255, 255, 0.015);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+/* Interactive elements */
+.glass-interactive {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.glass-interactive:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.glass-interactive:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Liquid Ripple Effect */
+.ripple-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ripple {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ripple-animation 0.8s ease-out;
+  pointer-events: none;
+}
+
+@keyframes ripple-animation {
+  from {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Recharts overrides */
+.recharts-text {
+  fill: #94a3b8 !important;
+  font-size: 11px !important;
+  font-family: inherit !important;
+}
+
+.recharts-cartesian-grid line {
+  stroke: rgba(255, 255, 255, 0.06) !important;
+}
+
+.recharts-tooltip-cursor {
+  fill: rgba(255, 255, 255, 0.04) !important;
+}
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+}
+
+/* Page fade transition */
+.page-enter {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Copilot Markdown Styles ─── */
+.copilot-md > *:first-child { margin-top: 0; }
+.copilot-md > *:last-child { margin-bottom: 0; }
+
+.copilot-md h1, .copilot-md h2, .copilot-md h3, .copilot-md h4 {
+  margin: 0.4rem 0 0.3rem;
+  line-height: 1.3;
+  color: #f1f5f9;
+  font-weight: 700;
+}
+.copilot-md h1 { font-size: 14px; }
+.copilot-md h2 { font-size: 13px; }
+.copilot-md h3 { font-size: 12px; }
+
+.copilot-md p { margin: 0.3rem 0; }
+
+.copilot-md ul, .copilot-md ol {
+  margin: 0.3rem 0;
+  padding-left: 1.1rem;
+}
+.copilot-md li { margin: 0.15rem 0; }
+
+.copilot-md strong { color: #f8fafc; font-weight: 700; }
+.copilot-md em { color: #cbd5e1; }
+
+.copilot-md code {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  padding: 0.05rem 0.3rem;
+  font-size: 0.9em;
+}
+
+.copilot-md pre {
+  margin: 0.4rem 0;
+  padding: 0.5rem 0.6rem;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  overflow-x: auto;
+}
+.copilot-md pre code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+.copilot-md blockquote {
+  margin: 0.3rem 0;
+  padding: 0.3rem 0.6rem;
+  border-left: 2px solid #ff4756;
+  background: rgba(255, 71, 86, 0.06);
+  border-radius: 0 6px 6px 0;
+  color: #e2e8f0;
+}
+
+.copilot-md table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0.4rem 0;
+  font-size: 11px;
+}
+.copilot-md th, .copilot-md td {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.25rem 0.4rem;
+  text-align: left;
+}
+.copilot-md th {
+  background: rgba(255, 255, 255, 0.04);
+  font-weight: 600;
+}
+
+.copilot-md a {
+  color: #ff4756;
+  text-decoration: underline;
+}

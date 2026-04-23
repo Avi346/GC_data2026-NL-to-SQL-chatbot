@@ -1,0 +1,8 @@
+﻿
+> ops-dashboard@0.0.0 build
+> tsc -b && vite build
+
+src/layout/DashboardLayout.tsx(2,19): error TS1484: 'NavItem' is a type and must be imported using a type-only import when 'verbatimModuleSyntax' is enabled.
+src/layout/Navbar.tsx(7,47): error TS6133: 'pageTitle' is declared but its value is never read.
+src/pages/UsageTrends.tsx(3,36): error TS6133: 'funnelData' is declared but its value is never read.
+src/pages/UsageTrends.tsx(5,1): error TS6133: 'GlassCard' is declared but its value is never read.

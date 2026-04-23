@@ -1,0 +1,56 @@
+version: "3.9"
+
+x-backend-build: &backend-build
+  context: .
+  dockerfile_inline: |
+    FROM python:3.11-slim
+    WORKDIR /app
+    RUN apt-get update && apt-get install -y --no-install-recommends \
+        build-essential \
+        gcc \
+        g++ \
+        && rm -rf /var/lib/apt/lists/*
+    COPY requirements.txt .
+    RUN pip install --no-cache-dir -r requirements.txt
+    COPY . .
+
+services:
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: chatbot-qdrant
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_storage:/qdrant/storage
+
+  init-data:
+    build: *backend-build
+    container_name: chatbot-init-data
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    command: python run_all_initializers.py
+    depends_on:
+      qdrant:
+        condition: service_started
+
+  backend:
+    build: *backend-build
+    container_name: chatbot-backend
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    command: uvicorn api:app --host 0.0.0.0 --port 8000
+    depends_on:
+      qdrant:
+        condition: service_started
+      init-data:
+        condition: service_completed_successfully
+
+volumes:
+  qdrant_storage:

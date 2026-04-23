@@ -1,0 +1,29 @@
+# Environment & Secrets
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.venv/
+
+# DuckDB
+frammer_analytics.duckdb
+frammer_analytics.duckdb.wal
+chroma_db/
+
+
+
+# Node / Frontend
+frontend/node_modules/
+frontend/build/
+
+# IDE
+.vscode/
+.idea/
+
+# Misc
+.deepeval
+.DS_Store
+Thumbs.db
